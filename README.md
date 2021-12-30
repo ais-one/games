@@ -7,3 +7,11 @@ Current Game List
 - [Fleet Commander Nimitz](fc-nimitz/Rules.md) (Dan Verssen Games)
 - [The Pacific War](PacificWar/Rules.md) (Lock N Load Publishing)
 
+
+Blog SSG
+
+- https://docsify.js.org/
+- https://docusaurus.io/
+- https://jamstack.org/generators/eleventy/
+- https://jamstack.org/generators/astro/
+- https://jamstack.org/generators/vitepress/
