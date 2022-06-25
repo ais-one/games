@@ -7,17 +7,19 @@
 export default {
   template: /*html*/`
     <div class="container">
+      <h1 class="title">Wargames Singapore Facebook Page</h1>
+      <h2 class="subtitle">Games Listing</h2>
       <div class="table-container" style="height:80vh;overflow-y:auto;">
         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead>
             <tr>
-              <th class="sticky-th"><abbr title="Game">Game</abbr></th>
-              <th class="sticky-th"><abbr title="Publisher">Publisher</abbr></th>
-              <th class="sticky-th"><abbr title="Post">Post</abbr></th>
+              <th class="sticky-th" @click="() => sortTable('title')"><abbr title="Game">Game Title {{ arrow('title') }}</abbr></th>
+              <th class="sticky-th">Publisher</th>
+              <th class="sticky-th" @click="() => sortTable('post')"><abbr title="Post">Facebook Post Link {{ arrow('post') }}</abbr></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(post, index) in posts">
+            <tr v-for="(post, index) in posts" :key="index">
               <td>{{post.title}}</td>
               <td>{{post.pub}}</td>
               <td><a :href="'https://www.facebook.com/wargames.singapore/posts/' + post.post" target="_blank">{{ post.post }}</a></td>
@@ -27,9 +29,28 @@ export default {
       </div>
     </div>
   `,
-  data() {
+  data () {
     return {
-      posts: []
+      posts: [],
+      asc: {
+        title: true,
+        post: true
+      },
+      lastItem: 'post',
+    }
+  },
+  methods: {
+    arrow (item) {
+      if (item === this.lastItem) return this.asc[item] ? '⇑' : '⇓'
+      return ''
+    },
+    sortTable (_key) {
+      if (this.asc[_key] == false)
+        this.posts.sort((a, b) => a[_key] < b[_key] ? -1 : (a[_key] > b[_key] ? 1 : 0))
+      else
+        this.posts.sort((a, b) => a[_key] > b[_key] ? -1 : (a[_key] < b[_key] ? 1 : 0))
+      this.asc[_key] = !this.asc[_key]
+      this.lastItem = _key
     }
   },
   async mounted() {
