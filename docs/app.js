@@ -6,16 +6,16 @@
 
 export default {
   template: /*html*/`
-    <div class="container">
+    <div class="container" style="width:80vw;">
       <h1 class="title">Wargames Singapore Facebook Page</h1>
-      <h2 class="subtitle">Games Listing</h2>
+      <h2 class="subtitle">Museum Acquisition Listing (latest on top)</h2>
       <div class="table-container" style="height:80vh;overflow-y:auto;">
         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead>
             <tr>
               <th class="sticky-th" @click="() => sortTable('title')"><abbr title="Game">Game Title {{ arrow('title') }}</abbr></th>
               <th class="sticky-th">Publisher</th>
-              <th class="sticky-th" @click="() => sortTable('post')"><abbr title="Post">Facebook Post Link {{ arrow('post') }}</abbr></th>
+              <th class="sticky-th" @click="() => sortTable('post')"><abbr title="Post">Post Link (Chronological) {{ arrow('post') }}</abbr></th>
             </tr>
           </thead>
           <tbody>
@@ -58,6 +58,7 @@ export default {
       const res = await fetch('data.json')
       this.posts = await res.json()
       // console.log(this.posts)
+      this.sortTable('post')
     } catch (e) {
     }
   }
