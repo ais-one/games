@@ -37,6 +37,8 @@ export default {
         post: true
       },
       lastItem: 'post',
+      search: '',
+      filteredPosts: [],
     }
   },
   methods: {
